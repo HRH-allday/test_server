@@ -7,7 +7,7 @@
         <a id="menu_item" class="active lightBlue item" @click="routing = 'HomePage'">
           Home
         </a>
-        <a id="menu_item" class="item" @click="routing = 'Demo1'">
+        <a id="menu_item_demo1" class="item" @click="routing = 'Demo1'">
           Demo1
         </a>
         <a id="menu_item" class="item" @click="routing = 'Demo2'">
@@ -17,7 +17,24 @@
     </div>
 
     <div id="contents">
-      <HomePage v-if="routing == 'HomePage'"></HomePage>
+      <div id="Homepage" v-if="routing == 'HomePage'">
+
+        <div id="info_area_home" >
+          <div id="info_container_home">
+            <h1 id="info_title_home">Image-Color Harmony</h1>
+            <h4 id="info_description_home">for Aesthetic & Affective Visual Design</h4>
+            <div id="start_button_home" class="ui huge primary button" @click="changeRoute">
+              Start
+            </div>
+          </div>
+        </div>
+
+        <div id="home_description">
+          <h3> Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text </h3>
+        </div>
+
+      </div>
+
       <Demo1 v-if="routing == 'Demo1'"></Demo1>
       <Demo2 v-if="routing == 'Demo2'"></Demo2>
     </div>
@@ -54,6 +71,12 @@
       }
     },
     methods:{
+      changeRoute : function(){
+        this.routing = "Demo1";
+
+        $('#menu_item_demo1').addClass('active lightBlue').siblings().removeClass('active lightBlue');
+        $('.ui.modal.scrolling.transition.hidden').remove();
+      }
     },
     mounted: function(){
 
@@ -113,6 +136,52 @@
   #menu_item:hover{
     color: #00b4d4;
 
+  }
+
+  #menu_item_demo1:hover{
+    color: #00b4d4;
+  }
+
+
+  #info_area_home{
+    padding-top: 100px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    background-image: url('../static/background.jpeg');
+    background-size: 100% 100%;
+    height: 450px;
+  }
+
+  #info_title_home{
+    font-size: 40px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  #info_description_home{
+    margin-top: 0px;
+    padding-top: 0px;
+    font-size: 25px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    color: #ffffff;
+
+  }
+
+  #start_button_home{
+    background-color: transparent;
+    border: 3px solid;
+    border-radius: 5px;
+    width: 200px;
+    font-size: 25px;
+    height: 50px;
+    padding-top: 10px;
+  }
+
+  #home_description{
+    padding: 50px;
+    text-align: left;
+    margin-top: 30px;
   }
 
 

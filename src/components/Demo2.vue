@@ -118,6 +118,14 @@
 </div>
 </div>
 
+  <div class="actions" style="clear:both;">
+    <div class="ui positive icon button" style="background-color: #000000; width: 100px;" @click="deleteImage2">
+      Delete
+    </div>
+  </div>
+
+
+
 </div>
 
 
@@ -125,7 +133,7 @@
   <div class="ui link centered cards">
     <div class="ui card"
     v-for="(card, index) in cardlist2" :key="card.id"
-    @click="showDetail2(card.title, card.description, card.image, card.bestColor, card.date)">
+    @click="showDetail2(card.title, card.description, card.image, card.bestColor, card.date, card._id)">
     <div id="card_preview" class="image"
     v-bind:style="{ 'background-image': 'url(' + card.image + '_crop.jpg)' }">
     <img/>
@@ -169,7 +177,8 @@
         detail_description2: "",
         detail_photo2: "",
         detail_date2: "",
-        detail_color2: ""
+        detail_color2: "",
+        detail_id2: ""
       }
     },
     methods:{
@@ -217,6 +226,26 @@
         httpPost.send(data);
       },
 
+      deleteImage2: function(){
+        var httpPost = new XMLHttpRequest(),
+        path = "http://143.248.250.191:3000/deleteImage2/",
+        data = JSON.stringify({id : this.detail_id2});
+        httpPost.onreadystatechange = function(err) {
+          if (httpPost.readyState == 4 && httpPost.status == 200){
+            var res = httpPost.responseText;
+            var jsonList = JSON.parse(res);
+            this.cardlist2 = jsonList.reverse();
+
+          } else {
+            console.log(err);
+          }
+        }.bind(this);
+        // Set the content type of the request to json since that's what's being sent
+        httpPost.open("POST", path, true);
+        httpPost.setRequestHeader('Content-Type', 'application/json');
+        httpPost.send(data);
+      },
+
 
       showModal2: function(){
         $('#addNewPhoto').modal({
@@ -239,7 +268,7 @@
         }).modal('show');
       },
 
-      showDetail2: function(title, detail,photo_url, color, date){
+      showDetail2: function(title, detail,photo_url, color, date, id){
         console.log(title +"," +detail);
         $('#seeDetail2').modal({
           onHide: function(){
@@ -248,6 +277,7 @@
             this.detail_description2 = "";
             this.detail_photo2 = "";
             this.detail_color2 = "";
+            this.detail_id2 = "";
 
           }.bind(this),
           onShow: function(){
@@ -255,6 +285,7 @@
             this.detail_description2 = detail;
             this.detail_photo2 = photo_url;
             this.detail_color2 = color;
+            this.detail_id2 = id;
             $('#detailHeader2').css("background-color", this.detail_color2);
             this.detail_date2 = date;
             console.log('shown');
@@ -351,12 +382,6 @@
     text-align: left;
   }
 
-  #rgbInput{
-    float: left;
-    width: 25%;
-    margin-left: 19px;
-  }
-
 
   #detailHeader2{
     text-align: center;
@@ -380,20 +405,6 @@
   }
 
 
-
-  #colorInput{
-    float: left;
-    margin-top: 5px;
-  }
-
-  #colorExample{
-    float: left;
-    width: 490px;
-    height: 35px;
-    background-color: #ff788f;
-    border-radius: 5px;
-
-  }
 
   #card_text{
     text-align: center;

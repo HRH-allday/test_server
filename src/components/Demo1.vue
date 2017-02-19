@@ -11,7 +11,7 @@
     </div>
 
 
-    <div id="addNewPhoto" class="ui modal">
+    <div id="addNewPhoto" class="ui modal" style="min-width: 680px;">
       <i class="close icon"></i>
       <div class="header">
         New Photo
@@ -21,7 +21,7 @@
           <div class="ui header">
             Upload your photo for magical improvement!
           </div>
-          <div class="content">
+          <div class="content" >
             <div class="ui form">
               <div class="field">
                 <label>제목 </label>
@@ -46,14 +46,14 @@
               <div class="field">
                 <label>색상 선택</label>
                 <input id="colorInput" type="color" ref="colorPicker" @change="getColor($event)" value="#ff0000" style="display: none">
-                <a>
-                  <div id="colorExample">
+                <div id="colorExample">
+                </div>
+                <div style="float:right; width: 40%;">
+                  <div id="colorPickButton" class="ui button" @click="onSelectColorClick" style="float:right; margin-right: 0px;">
+                    색상 선택
                   </div>
-                </a>
 
-                <input id="rgbInput" class="fluid" v-model="rgbhex"></input>
-                <div id="colorPickButton" class="ui button" @click="onSelectColorClick">
-                  색상 선택
+                  <input id="rgbInput" class="fluid" v-model="rgbhex" style="float:right; width:60%"></input>
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@
 
       </div>
 
-      <div class="actions">
+      <div class="actions" style="clear:both;">
         <div class="ui black deny button">
           Cancel
         </div>
@@ -88,7 +88,7 @@
             <div class="ui card">
               <div id="card_preview_detail" class="image"
               v-bind:style="{ 'background-image': 'url(' + detail_photo + '_output_0.jpg)' }">
-              </div>
+            </div>
 
 
 
@@ -103,25 +103,31 @@
           <div class="ui card" style="margin-left: 30px;">
             <div id="card_preview_detail" class="image"
             v-bind:style="{ 'background-image': 'url(' + detail_photo + '_output_1.jpg)' }">
-            </div>
-
           </div>
 
-
-          <div style="text-align: center;">
-            <h3 id="card_summary" style="margin-left: 30px;">Adjusted</h3>
-          </div>
         </div>
 
+
+        <div style="text-align: center;">
+          <h3 id="card_summary" style="margin-left: 30px;">Adjusted</h3>
+        </div>
       </div>
 
-      <div id="detailDescription">
+    </div>
+
+    <div id="detailDescription">
       {{detail_description}}
-      </div>
     </div>
+  </div>
+
+  <div class="actions" style="clear:both;">
+    <div class="ui positive icon button" style="background-color: #000000; width: 100px;" @click="deleteImage">
+      Delete
+    </div>
+  </div>
 
 
-    </div>
+</div>
 
 
 <div id="card_area" class="ui centered">
@@ -129,7 +135,7 @@
   <div class="ui link centered cards">
     <div class="ui card"
     v-for="(card, index) in cardlist" :key="card.id"
-    @click="showDetail(card.title, card.description, card.image, card.color, card.date)">
+    @click="showDetail(card.title, card.description, card.image, card.color, card.date, card._id)">
     <div id="card_preview" class="image"
     v-bind:style="{ 'background-image': 'url(' + card.image + '_output.jpg)' }">
   </div>
@@ -179,7 +185,8 @@
         detail_description: "",
         detail_photo: "",
         detail_date: "",
-        detail_color: ""
+        detail_color: "",
+        detail_id: ""
       }
     },
     methods:{
@@ -226,6 +233,25 @@
         httpPost.setRequestHeader('Content-Type', 'application/json');
         httpPost.send(data);
       },
+      deleteImage: function(){
+        var httpPost = new XMLHttpRequest(),
+        path = "http://143.248.250.191:3000/deleteImage/",
+        data = JSON.stringify({id : this.detail_id});
+        httpPost.onreadystatechange = function(err) {
+          if (httpPost.readyState == 4 && httpPost.status == 200){
+            var res = httpPost.responseText;
+            var jsonList = JSON.parse(res);
+            this.cardlist = jsonList.reverse();
+
+          } else {
+            console.log(err);
+          }
+        }.bind(this);
+        // Set the content type of the request to json since that's what's being sent
+        httpPost.open("POST", path, true);
+        httpPost.setRequestHeader('Content-Type', 'application/json');
+        httpPost.send(data);
+      },
 
 
       showModal: function(){
@@ -250,7 +276,7 @@
         }).modal('show');
       },
 
-      showDetail: function(title, detail,photo_url, color, date){
+      showDetail: function(title, detail,photo_url, color, date, id){
         console.log(title +"," +detail);
         $('#seeDetail').modal({
           onHide: function(){
@@ -259,6 +285,7 @@
             this.detail_description = "";
             this.detail_photo = "";
             this.detail_color = "";
+            this.detail_id = "";
 
           }.bind(this),
           onShow: function(){
@@ -266,6 +293,7 @@
             this.detail_description = detail;
             this.detail_photo = photo_url;
             this.detail_color = color;
+            this.detail_id = id;
             $('#detailHeader').css("background-color", this.detail_color);
             this.detail_date = date;
             console.log('shown');
@@ -372,21 +400,13 @@
   }
 
   #rgbInput{
-    float: left;
-    width: 25%;
-    margin-left: 19px;
+    margin-left: 0px !important;
   }
 
-
-
-  #colorInput{
-    float: left;
-    margin-top: 5px;
-  }
 
   #colorExample{
     float: left;
-    width: 490px;
+    width: 60% !important;
     height: 35px;
     background-color: #ff788f;
     border-radius: 5px;

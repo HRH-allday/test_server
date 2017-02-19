@@ -1,18 +1,5 @@
 <template>
   <div class="homepage">
-    <div id="info_area_home">
-      <div id="info_container_home">
-        <h1 id="info_title_home">Image-Color Harmony</h1>
-        <h4 id="info_description_home">for Aesthetic & Affective Visual Design</h4>
-        <div id="start_button_home" class="ui huge primary button" >
-          Start
-        </div>
-      </div>
-    </div>
-
-    <div id="home_description">
-      <h3> Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text </h3>
-    </div>
   </div>
 </template>
 
@@ -31,14 +18,6 @@
     name: 'HomePage',
     data () {
       return {
-        cardlist: [new Card('../static/default.png','Hyojoo Han', 'Feb. 10. 2017', 'This is a photo of Korean actress Hyojoo Han.'), new Card('../static/hhj1.jpg','Hyojoo Han', 'Feb. 10. 2017', 'This is a photo of Korean actress Hyojoo Han.'), new Card('../static/hhj2.jpg','Hyojoo Han', 'Feb. 10. 2017', 'This is a photo of Korean actress Hyojoo Han.')],
-        cid: 0,
-        card_title: "",
-        card_description: "",
-        card_photo_title: "",
-        card_photo: "",
-        rgb: {r:255, g:120 ,b:143},
-        rgbhex: "#ff788f"
       }
     },
     methods:{
