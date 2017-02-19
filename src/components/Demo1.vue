@@ -259,13 +259,11 @@
             this.detail_description = "";
             this.detail_photo = "";
             this.detail_color = "";
-            $('#seeDetail').remove();
 
           }.bind(this),
           onShow: function(){
             this.detail_title = title;
             this.detail_description = detail;
-            $('#detail_image').attr('src', photo_url);
             this.detail_photo = photo_url;
             this.detail_color = color;
             $('#detailHeader').css("background-color", this.detail_color);

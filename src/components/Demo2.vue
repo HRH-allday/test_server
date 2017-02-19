@@ -63,9 +63,9 @@
 
     <div id="seeDetail2" class="ui modal">
       <i class="close icon"></i>
-      <div id="detailHeader" class="header" >
-        <h1 id="detailHeaderTitle" >{{detail_title2}}</h1>
-        <h2 id="detailHeaderDescription" >{{detail_date2}}</h2>
+      <div id="detailHeader2" class="header" >
+        <h1 id="detailHeaderTitle2" >{{detail_title2}}</h1>
+        <h2 id="detailHeaderDescription2" >{{detail_date2}}</h2>
       </div>
 
       <div class="content">
@@ -248,16 +248,14 @@
             this.detail_description2 = "";
             this.detail_photo2 = "";
             this.detail_color2 = "";
-            $('#seeDetail2').remove();
 
           }.bind(this),
           onShow: function(){
             this.detail_title2 = title;
             this.detail_description2 = detail;
-            $('#detail_image').attr('src', photo_url);
             this.detail_photo2 = photo_url;
             this.detail_color2 = color;
-            $('#detailHeader').css("background-color", this.detail_color2);
+            $('#detailHeader2').css("background-color", this.detail_color2);
             this.detail_date2 = date;
             console.log('shown');
           }.bind(this),
@@ -357,6 +355,28 @@
     float: left;
     width: 25%;
     margin-left: 19px;
+  }
+
+
+  #detailHeader2{
+    text-align: center;
+    height: 115px;
+    color: white;
+  }
+
+  #detailHeaderTitle2{
+    padding-top: 20px;
+    vertical-align: middle;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: 29px;
+  }
+
+  #detailHeaderDescription2{
+    padding-top: 0px;
+    margin-top: 0px;
+    font-size: 17px;
+    font-weight: 200;
   }
 
 

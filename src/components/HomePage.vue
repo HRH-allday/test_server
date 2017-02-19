@@ -1,5 +1,18 @@
 <template>
   <div class="homepage">
+    <div id="info_area_home">
+      <div id="info_container_home">
+        <h1 id="info_title_home">Image-Color Harmony</h1>
+        <h4 id="info_description_home">for Aesthetic & Affective Visual Design</h4>
+        <div id="start_button_home" class="ui huge primary button" >
+          Start
+        </div>
+      </div>
+    </div>
+
+    <div id="home_description">
+      <h3> Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text Body text </h3>
+    </div>
   </div>
 </template>
 
@@ -169,44 +182,46 @@
 
 <style>
 
-
-  #card_area{
-    margin: 50px;
-  }
-
-  #card_preview{
-    width: 290px;
-    height: 300px;
-    background-image: url('../assets/hhj1.jpg');
+  #info_area_home{
+    padding-top: 100px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    background-image: url('../static/background.jpeg');
     background-size: 100% 100%;
+    height: 450px;
   }
 
-  .content{
-    text-align: left;
+  #info_title_home{
+    font-size: 40px;
+    font-weight: 700;
+    color: #ffffff;
   }
 
-  #rgbInput{
-    float: left;
-    width: 25%;
-    margin-left: 19px;
+  #info_description_home{
+    margin-top: 0px;
+    padding-top: 0px;
+    font-size: 25px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    color: #ffffff;
+
   }
 
-
-
-  #colorInput{
-    float: left;
-    margin-top: 5px;
-  }
-
-  #colorExample{
-    float: left;
-    width: 490px;
-    height: 35px;
-    background-color: #ff788f;
+  #start_button_home{
+    background-color: transparent;
+    border: 3px solid;
     border-radius: 5px;
-
+    width: 200px;
+    font-size: 25px;
+    height: 50px;
+    padding-top: 10px;
   }
 
+  #home_description{
+    padding: 50px;
+    text-align: left;
+    margin-top: 30px;
+  }
 
 
 </style>

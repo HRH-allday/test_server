@@ -17,13 +17,13 @@
     </div>
 
     <div id="contents">
-    <HomePage v-if="routing == 'HomePage'"></HomePage>
-    <Demo1 v-if="routing == 'Demo1'"></Demo1>
-    <Demo2 v-if="routing == 'Demo2'"></Demo2>
+      <HomePage v-if="routing == 'HomePage'"></HomePage>
+      <Demo1 v-if="routing == 'Demo1'"></Demo1>
+      <Demo2 v-if="routing == 'Demo2'"></Demo2>
     </div>
     
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -39,6 +39,7 @@
     this.date = date;
     this.description = description;
   }
+
 
   export default {
     name: 'app',
@@ -59,9 +60,11 @@
       $(document).ready(function(){
         $('.ui.secondary.pointing.menu a.item').on('click', function(){
           $(this).addClass('active lightBlue').siblings().removeClass('active lightBlue');
+          $('.ui.modal.scrolling.transition.hidden').remove();
 
         });
       });
+
     }
   }
 </script>
@@ -86,6 +89,7 @@
     padding-right: 50px;
     height: 25px;
     background-color: #575b5b;
+    margin-bottom: 0px;
   }
   .ui.secondary.pointing.menu .active.lightBlue.item{
     color: #00b4d4;
